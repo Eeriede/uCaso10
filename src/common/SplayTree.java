@@ -8,7 +8,7 @@ public class SplayTree<E> {
 	}
 
 	private void printHelper(Nodo<E> currPtr, String indent, boolean last) {
-		// print the tree structure on the screen
+		// ayuda a imprimir la estructura en pantalla 
 	   	if (currPtr != null) {
 		   System.out.print(indent);
 		   if (last) {
@@ -57,7 +57,7 @@ public class SplayTree<E> {
 			System.out.println("Couldn't find key in the tree");
 			return;
 		}
-		// split operation
+		// 
 		splay(x);
 		if (x.right != null) {
 			t = x.right;
@@ -69,15 +69,15 @@ public class SplayTree<E> {
 		s.right = null;
 		x = null;
 
-		// join operation
-		if (s.left != null){ // remove x
+		// llama a join
+		if (s.left != null){ // borra x
 			s.left.parent = null;
 		}
 		root = join(s.left, t);
 		s = null;
 	}
 
-	// rotate left at node x
+	// rotacion izquierda
 	private void leftRotate(Nodo<E> x) {
 		Nodo<E> y = x.right;
 		x.right = y.left;
@@ -96,7 +96,7 @@ public class SplayTree<E> {
 		x.parent = y;
 	}
 
-	// rotate right at node x
+	// rotacion derecha
 	private void rightRotate(Nodo<E> x) {
 		Nodo<E> y = x.left;
 		x.left = y.right;
@@ -115,194 +115,191 @@ public class SplayTree<E> {
 		x.parent = y;
 	}
 
-	// Splaying operation. It moves x to the root of the tree
+	// operacion splay, lleva a X a la raiz
 	private void splay(Nodo<E> x) {
 		while (x.parent != null) {
 			if (x.parent.parent == null) {
 				if (x == x.parent.left) {
-					// zig rotation
+					//derecha
 					rightRotate(x.parent);
 				} else {
-					// zag rotation
+					//izquierda
 					leftRotate(x.parent);
 				}
 			} else if (x == x.parent.left && x.parent == x.parent.parent.left) {
-				// zig-zig rotation
+				// derecha-derecha
 				rightRotate(x.parent.parent);
 				rightRotate(x.parent);
 			} else if (x == x.parent.right && x.parent == x.parent.parent.right) {
-				// zag-zag rotation
+				// izquierda-izquierda
 				leftRotate(x.parent.parent);
 				leftRotate(x.parent);
 			} else if (x == x.parent.right && x.parent == x.parent.parent.left) {
-				// zig-zag rotation
+				// izquierda-derecha
 				leftRotate(x.parent);
 				rightRotate(x.parent);
 			} else {
-				// zag-zig rotation
+				// derecha-izquierda
 				rightRotate(x.parent);
 				leftRotate(x.parent);
 			}
 		}
 	}
 
-	// joins two trees s and t
-	private Nodo<E> join(Nodo<E> s, Nodo<E> t){
-		if (s == null) {
-			return t;
+	// une dos arboles
+	private Nodo<E> join(Nodo<E> nodo1, Nodo<E> nodo2){
+		if (nodo1 == null) {
+			return nodo2;
 		}
 
-		if (t == null) {
-			return s;
+		if (nodo2 == null) {
+			return nodo1;
 		}
-		Nodo<E> x = maximum(s);
-		splay(x);
-		x.right = t;
-		t.parent = x;
-		return x;
+		Nodo<E> maximo = maximum(nodo1);
+		splay(maximo);
+		maximo.right = nodo2;
+		nodo2.parent = maximo;
+		return maximo;
 	}
 
 
-	private void preOrderHelper(Nodo<E> node) {
-		if (node != null) {
-			System.out.print(node.key + " ");
-			preOrderHelper(node.left);
-			preOrderHelper(node.right);
+	private void preOrderHelper(Nodo<E> pNodo) {
+		if (pNodo != null) {
+			System.out.print(pNodo.key + " ");
+			preOrderHelper(pNodo.left);
+			preOrderHelper(pNodo.right);
 		} 
 	}
 
-	private void inOrderHelper(Nodo<E> node) {
-		if (node != null) {
-			inOrderHelper(node.left);
-			System.out.print(node.key + " ");
-			inOrderHelper(node.right);
+	private void inOrderHelper(Nodo<E> pNodo) {
+		if (pNodo != null) {
+			inOrderHelper(pNodo.left);
+			System.out.print(pNodo.key + " ");
+			inOrderHelper(pNodo.right);
 		} 
 	}
 
-	private void postOrderHelper(Nodo<E> node) {
-		if (node != null) {
-			postOrderHelper(node.left);
-			postOrderHelper(node.right);
-			System.out.print(node.key + " ");
+	private void postOrderHelper(Nodo<E> pNodo) {
+		if (pNodo != null) {
+			postOrderHelper(pNodo.left);
+			postOrderHelper(pNodo.right);
+			System.out.print(pNodo.key + " ");
 		} 
 	}
 
-	// Pre-Order traversal
-	// Node->Left Subtree->Right Subtree
+	// Pre-Orden
+	// raiz - izquierda -derecha
 	public void preorder() {
 		preOrderHelper(this.root);
 	}
 
-	// In-Order traversal
-	// Left Subtree -> Node -> Right Subtree
+	// In-Orden
+	// izquierda - raiz - derecha
 	public void inorder() {
 		inOrderHelper(this.root);
 	}
 
-	// Post-Order traversal
-	// Left Subtree -> Right Subtree -> Node
+	// Post-Orden
+	// izquierda - derecha - raiz
 	public void postorder() {
 		postOrderHelper(this.root);
 	}
 
-	// search the tree for the key k
-	// and return the corresponding node
-	public Nodo<E> searchTree(int k) {
-		Nodo<E> x = searchTreeHelper(root, k);
-		if (x != null) {
-			splay(x);
+	// busca el nodo con la llave ingresada
+	// retorna el nodo
+	public Nodo<E> searchTree(String pKey) {
+		int key = pKey.hashCode();
+		Nodo<E> nodo = searchTreeHelper(root, key);
+		if (nodo != null) {
+			splay(nodo);
 		}
-		return x;
+		return nodo;
 	}
 
-	// find the node with the minimum key
-	public Nodo<E> minimum(Nodo<E> node) {
-		while (node.left != null) {
-			node = node.left;
+	// encuentra el nodo con la llave mas pequena
+	public Nodo<E> minimum(Nodo<E> pNodo) {
+		while (pNodo.left != null) {
+			pNodo = pNodo.left;
 		}
-		return node;
+		return pNodo;
 	}
 
-	// find the node with the maximum key
-	public Nodo<E> maximum(Nodo<E> node) {
-		while (node.right != null) {
-			node = node.right;
+	// encuentra el nodo con la llave mas grande
+	public Nodo<E> maximum(Nodo<E> pNodo) {
+		while (pNodo.right != null) {
+			pNodo = pNodo.right;
 		}
-		return node;
+		return pNodo;
 	}
 
-	// find the successor of a given node
-	public Nodo<E> successor(Nodo<E> x) {
-		// if the right subtree is not null,
-		// the successor is the leftmost node in the
-		// right subtree
-		if (x.right != null) {
-			return minimum(x.right);
+	// encuentra un sucesor de un nodo
+	public Nodo<E> successor(Nodo<E> pNodo) {
+		// si el lado derecho no es nulo,
+		// el sucesor es el menor de este lado
+		if (pNodo.right != null) {
+			return minimum(pNodo.right);
 		}
-
-		// else it is the lowest ancestor of x whose
-		// left child is also an ancestor of x.
-		Nodo<E> y = x.parent;
-		while (y != null && x == y.right) {
-			x = y;
-			y = y.parent;
+		Nodo<E> nodoPadre = pNodo.parent;
+		while (nodoPadre != null && pNodo == nodoPadre.right) {
+			pNodo = nodoPadre;
+			nodoPadre = nodoPadre.parent;
 		}
-		return y;
+		return nodoPadre;
 	}
 
-	// find the predecessor of a given node
-	public Nodo<E> predecessor(Nodo<E> x) {
-		// if the left subtree is not null,
-		// the predecessor is the rightmost node in the 
-		// left subtree
-		if (x.left != null) {
-			return maximum(x.left);
+	// encuentra un predecesor de un nodo
+	public Nodo<E> predecessor(Nodo<E> pNodo) {
+		// si el lado izquierdo no es nulo,
+		// el predecesor es el mayor de este lado 
+		if (pNodo.left != null) {
+			return maximum(pNodo.left);
 		}
 
-		Nodo<E> y = x.parent;
-		while (y != null && x == y.left) {
-			x = y;
-			y = y.parent;
+		Nodo<E> nodoPadre = pNodo.parent;
+		while (nodoPadre != null && pNodo == nodoPadre.left) {
+			pNodo = nodoPadre;
+			nodoPadre = nodoPadre.parent;
 		}
 
-		return y;
+		return nodoPadre;
 	}
 
-	// insert the key to the tree in its appropriate position
+	// inserta una elemento
 	public void insert(E key) {
 		Nodo<E> node = new Nodo<E>(key);
-		Nodo<E> y = null;
-		Nodo<E> x = this.root;
+		Nodo<E> nodoPadre = null;
+		Nodo<E> nodoComparado = this.root;
 
-		while (x != null) {
-			y = x;
-			if (node.key < x.key) {
-				x = x.left;
+		while (nodoComparado != null) {
+			nodoPadre = nodoComparado;
+			if (node.key < nodoComparado.key) {
+				nodoComparado = nodoComparado.left;
 			} else {
-				x = x.right;
+				nodoComparado = nodoComparado.right;
 			}
 		}
 
-		// y is parent of x
-		node.parent = y;
-		if (y == null) {
+		// y es padre de x
+		node.parent = nodoPadre;
+		if (nodoPadre == null) {
 			root = node;
-		} else if (node.key < y.key) {
-			y.left = node;
+		} else if (node.key < nodoPadre.key) {
+			nodoPadre.left = node;
 		} else {
-			y.right = node;
+			nodoPadre.right = node;
 		}
 
-		// splay node
+		// hace splay de node
 		splay(node);
 	}
 
-	// delete the node from the tree
-	void deleteNode(int data) {
+	// borra nodo
+	void deleteNode(String pNombre) {
+		int data = pNombre.hashCode();
 		deleteNodeHelper(this.root, data);
 	}
 
-	// print the tree structure on the screen
+	// imprime el arbol
 	public void prettyPrint() {
 		printHelper(this.root, "", true);
 	}

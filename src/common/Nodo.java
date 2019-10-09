@@ -3,13 +3,14 @@ package common;
 public class Nodo<E> {
 	private E data;
 	Nodo<E> parent;
-	Nodo<E> left; 
+	Nodo<E> left;
 	Nodo<E> right;
 	int key;
-		
+
 	public Nodo(E pValor) {
 		this.data = pValor;
-		this.key = (int) pValor;
+		Sensor sensor = (Sensor)pValor;
+		this.key = sensor.getID().hashCode();
 		this.parent = null;
 		this.left = null;
 		this.right = null;
