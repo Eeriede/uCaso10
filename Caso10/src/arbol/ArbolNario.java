@@ -3,7 +3,6 @@ package arbol;
 public class ArbolNario<T> {
 	Nodo<T> raiz;
 	Nodo<T> auxiliarBusqueda;
-	String ultimoPath;
 	
 	public Nodo<T> getRaiz() {
 		return raiz;
