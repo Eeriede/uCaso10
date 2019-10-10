@@ -10,7 +10,7 @@ public class Prueba {
 		}
 		for(int contador = 0;contador < 10;contador++) {
 			arbol.prettyPrint();
-			System.out.println(arbol.searchTree(contador).getValue().getId());
+			arbol.searchTree(contador);
 			arbol.prettyPrint();
 		}
 		

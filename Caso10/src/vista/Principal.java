@@ -21,7 +21,16 @@ public class Principal extends JFrame implements ActionListener {
 
 	private JPanel contentPane;
 	Controlador controlador;
+        private JTree tree;
 
+        public JTree getTree() {
+            return tree;
+        }
+
+        public void setTree(JTree tree) {
+            this.tree = tree;
+        }
+        
 	/**
 	 * Launch the application.
 	 */
@@ -67,9 +76,10 @@ public class Principal extends JFrame implements ActionListener {
 		btnBuscar.addActionListener(this);
 		contentPane.add(btnBuscar);
 		
-		JTree tree = new JTree();
+		tree = new JTree();
 		tree.setBounds(200, 103, 220, 181);
 		contentPane.add(tree);
+                tree.getSelectionModel().addTreeSelectionListener(this);
 	}
 
 	@Override
@@ -77,7 +87,7 @@ public class Principal extends JFrame implements ActionListener {
 		// TODO Auto-generated method stub
 		JButton botonActual = (JButton)e.getSource();
 		if(botonActual.getText().compareTo("Ingresar")==0) {
-			Ingresar ventanaIngresar = new Ingresar(controlador);
+			Ingresar ventanaIngresar = new Ingresar(controlador,this.getTree());
 		}else {
 			if(botonActual.getText().compareTo("Eliminar")==0) {
 				Eliminar ventanaEliminar = new Eliminar(controlador);

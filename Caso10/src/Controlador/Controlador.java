@@ -6,12 +6,16 @@ import common.*;
 import common.Nodo;
 
 public class Controlador {
+        private final int CAPACIDAD_MAXIMA = 30000;
 	ArbolNario<Sensor> arbol = new ArbolNario<Sensor>(new Sensor(000,"Salida"));
+        
 	SplayTree<Sensor> arbolBusqueda = new SplayTree<Sensor>();
-	
+	public Controlador(){
+            arbol.getRaiz().getValue().setCapacidad(CAPACIDAD_MAXIMA);
+        }
 	public boolean agregarSensor( int pId, String pCanton) {
 		Sensor aAgregar = new Sensor(pId,pCanton);
-		if(arbol.buscarElemento(aAgregar) != null) {
+		if(arbol.buscarElemento(aAgregar) == null) {
 			return false;
 		}
 		arbol.agregarElemento(aAgregar, arbol.getRaiz().getValue());
@@ -21,12 +25,12 @@ public class Controlador {
 	
 	public boolean agregarSensor( int pId, String pCanton, int pIdPadre) {
 		Sensor aAgregar = new Sensor(pId,pCanton);
-		if(arbol.buscarElemento(aAgregar) != null) {
+		if(arbol.buscarElemento(aAgregar) == null) {
 			return false;
 		}
 		Sensor auxiliar = new Sensor(pIdPadre, "");
 		Sensor padreHipotetico = arbol.buscarElemento(auxiliar);
-		if(padreHipotetico == null){
+		if(padreHipotetico== null){
 			return false;
 		}
 		arbol.agregarElemento(aAgregar,padreHipotetico);

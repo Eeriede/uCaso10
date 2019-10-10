@@ -11,8 +11,6 @@ import Controlador.Controlador;
 import common.Sensor;
 
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -23,6 +21,8 @@ import javax.swing.JTree;
 import javax.swing.JComboBox;
 import javax.swing.JCheckBox;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
+import javax.swing.tree.DefaultMutableTreeNode;
 
 public class Ingresar extends JFrame implements ActionListener{
 
@@ -32,11 +32,14 @@ public class Ingresar extends JFrame implements ActionListener{
 	private JTextField textField_2;
 	private JTextField textField_3;
 	private Controlador controlador;
+        private JCheckBox chckbxConectarAUn;
+        private JTree tree;
 
 	/**
 	 * Create the frame.
 	 */
-	public Ingresar(Controlador pControlador) {
+	public Ingresar(Controlador pControlador, JTree pTree) {
+                tree = pTree;
 		this.controlador = pControlador;
 		setTitle("Ingresar");
 		setBounds(100, 100, 450, 374);
@@ -86,7 +89,7 @@ public class Ingresar extends JFrame implements ActionListener{
 		comboBox.setBounds(113, 228, 92, 22);
 		contentPane.add(comboBox);
 		
-		JCheckBox chckbxConectarAUn = new JCheckBox("Conectar a un sensor existente");
+		chckbxConectarAUn = new JCheckBox("Conectar a un sensor existente");
 		chckbxConectarAUn.setBounds(234, 228, 214, 23);
 		contentPane.add(chckbxConectarAUn);
 		
@@ -106,23 +109,15 @@ public class Ingresar extends JFrame implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		try {
-			String ID = textField.getText();
-			int id = Integer.parseInt(ID);
-			String canton = textField_1.getText();
-			if(canton.compareTo("")==0) {
-				JOptionPane.showMessageDialog(this, "Ocupa un cantón");
-			}else {
-				if(controlador.agregarSensor(id, canton)) {
-					JOptionPane.showMessageDialog(this, "Agregado correctamente");
-					this.dispose();
-				}else {
-					JOptionPane.showMessageDialog(this, "Error");
-				}
-			}
-		}catch(Exception error) {
-			JOptionPane.showMessageDialog(this, "El ID ocupa un numero");
-		}
-	}
+		if(chckbxConectarAUn.isSelected()){
+                    if(textField_3.getText().equals(null)){
+                        JOptionPane.showMessageDialog(this, "Debe digitar un sensor al cual agregar");
+                    }else{
+                        controlador.agregarSensor(Integer.parseInt(textField_1.getText()), textField_2.getText());
+                        DefaultMutableTreeNode hijo = new DefaultMutableTreeNode(textField_1.getText());
+                        contentPane.add(tree);
+                    }
+                }
+        }
+	
 }

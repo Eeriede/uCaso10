@@ -1,20 +1,39 @@
 package common;
 
 public class Sensor {
+        private final int CONSUMO_DEFAULT = 5000;
 	private int id;
 	private String canton;
 	private String barrio;
 	private String distrito;
 	private int consumoNormal;
 	private int capacidad;
-	
+	private boolean aguaSuficiente;
 	public Sensor(int pId, String pCanton) {
+                this.consumoNormal = CONSUMO_DEFAULT;
 		this.id = pId;
 		this.canton = pCanton;
 	}
 	public int getId() {
 		return id;
 	}
+
+        public boolean isAguaSuficiente() {
+            return aguaSuficiente;
+        }
+
+        public void setAguaSuficiente(boolean aguaSuficiente) {
+            this.aguaSuficiente = aguaSuficiente;
+        }
+
+        public int getCapacidad() {
+            return capacidad;
+        }
+
+        public void setCapacidad(int capacidad) {
+            this.capacidad = capacidad;
+        }
+        
 	public void setId(int id) {
 		this.id = id;
 	}
