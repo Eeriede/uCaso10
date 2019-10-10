@@ -1,42 +1,70 @@
 package common;
 
 public class Sensor {
-	private String ID;
-	private String path;
+	private int id;
+	private String canton;
+	private String barrio;
+	private String distrito;
 	private int consumoNormal;
-	private int capacidadSalida;
+	private int capacidad;
 	
-	public Sensor(String pID, String pPath, int pConsumoNormal, int pCapacidadSalida) {
-		setID(pID);
-		setPath(pPath);
-		setConsumoNormal(pConsumoNormal);
-		setCapacidadSalida(pCapacidadSalida);
+	public Sensor(int pId, String pCanton) {
+		this.id = pId;
+		this.canton = pCanton;
 	}
-	
-	public String getID() {
-		return ID;
+	public int getId() {
+		return id;
 	}
-	public void setID(String pID) {
-		ID = pID;
+	public void setId(int id) {
+		this.id = id;
 	}
-	public String getPath() {
-		return path;
+	public String getCanton() {
+		return canton;
 	}
-	public void setPath(String pPath) {
-		this.path = pPath;
+	public void setCanton(String canton) {
+		this.canton = canton;
+	}
+	public String getBarrio() {
+		return barrio;
+	}
+	public void setBarrio(String barrio) {
+		this.barrio = barrio;
+	}
+	public String getDistrito() {
+		return distrito;
+	}
+	public void setDistrito(String distrito) {
+		this.distrito = distrito;
 	}
 	public int getConsumoNormal() {
 		return consumoNormal;
 	}
-	public void setConsumoNormal(int pConsumoNormal) {
-		this.consumoNormal = pConsumoNormal;
+	public void setConsumoNormal(int consumoNormal) {
+		this.consumoNormal = consumoNormal;
 	}
-	public int getCapacidadSalida() {
-		return capacidadSalida;
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + id;
+		return result;
 	}
-	public void setCapacidadSalida(int pCapacidadSalida) {
-		this.capacidadSalida = pCapacidadSalida;
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Sensor other = (Sensor) obj;
+		if (id != other.id)
+			return false;
+		return true;
 	}
-	
-	
+	@Override
+	public String toString() {
+		return "Sensor [id=" + id + ", canton=" + canton + ", barrio=" + barrio + ", distrito=" + distrito
+				+ ", consumoNormal=" + consumoNormal + "]";
+	}	
 }

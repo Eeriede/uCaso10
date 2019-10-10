@@ -10,7 +10,7 @@ public class Nodo<E> {
 	public Nodo(E pValor) {
 		this.data = pValor;
 		Sensor sensor = (Sensor)pValor;
-		this.key = sensor.getID().hashCode();
+		this.key = sensor.getId();
 		this.parent = null;
 		this.left = null;
 		this.right = null;
@@ -43,5 +43,4 @@ public class Nodo<E> {
 	public void setRight(Nodo<E> right) {
 		this.right = right;
 	}
-	
 }

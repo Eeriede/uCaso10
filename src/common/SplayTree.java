@@ -207,9 +207,8 @@ public class SplayTree<E> {
 
 	// busca el nodo con la llave ingresada
 	// retorna el nodo
-	public Nodo<E> searchTree(String pKey) {
-		int key = pKey.hashCode();
-		Nodo<E> nodo = searchTreeHelper(root, key);
+	public Nodo<E> searchTree(int pKey) {
+		Nodo<E> nodo = searchTreeHelper(root, pKey);
 		if (nodo != null) {
 			splay(nodo);
 		}
@@ -294,9 +293,8 @@ public class SplayTree<E> {
 	}
 
 	// borra nodo
-	void deleteNode(String pNombre) {
-		int data = pNombre.hashCode();
-		deleteNodeHelper(this.root, data);
+	public void deleteNode(int pData) {
+		deleteNodeHelper(this.root, pData);
 	}
 
 	// imprime el arbol
