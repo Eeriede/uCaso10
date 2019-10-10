@@ -5,7 +5,7 @@ public class Sensor {
 	private String canton;
 	private String barrio;
 	private String distrito;
-	
+	private int consumoNormal;
 	
 	public Sensor(int pId, String pCanton) {
 		this.id = pId;
@@ -34,6 +34,12 @@ public class Sensor {
 	}
 	public void setDistrito(String distrito) {
 		this.distrito = distrito;
+	}
+	public int getConsumoNormal() {
+		return consumoNormal;
+	}
+	public void setConsumoNormal(int consumoNormal) {
+		this.consumoNormal = consumoNormal;
 	}
 	@Override
 	public int hashCode() {
