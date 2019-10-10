@@ -62,6 +62,9 @@ public class Sensor {
 			return false;
 		return true;
 	}
-	
-	
+	@Override
+	public String toString() {
+		return "Sensor [id=" + id + ", canton=" + canton + ", barrio=" + barrio + ", distrito=" + distrito
+				+ ", consumoNormal=" + consumoNormal + "]";
+	}	
 }

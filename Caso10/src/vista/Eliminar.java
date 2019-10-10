@@ -57,6 +57,7 @@ public class Eliminar extends JFrame implements ActionListener{
 	public void actionPerformed(ActionEvent arg0) {
 		// TODO Auto-generated method stub
 		controlador.eliminarSensor(Integer.parseInt(textField.getText()));
+		textField.setText("");
 		
 	}
 }

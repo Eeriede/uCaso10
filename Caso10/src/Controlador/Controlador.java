@@ -51,8 +51,12 @@ public class Controlador {
 		if(nodoEncontrado!=null) {
 			Sensor sensor = nodoEncontrado.getValue();
 			listaSensores.add(sensor);
-			nodoEncontrado.get
-			listaSensores.add(e);
+			arbol.buscarElemento(sensor);
+			arbol.Nodo<Sensor> nodosHijos  = arbol.getAuxiliar();
+			listaSensores.add(nodosHijos.getPadre().getValue());
+			for(int contador = 0; contador<nodosHijos.getNumeroHijos();contador++) {
+				listaSensores.add(nodosHijos.getListaHijos().get(contador).getValue());
+			}
 			return listaSensores;
 		}
 		return null;

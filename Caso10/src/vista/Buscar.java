@@ -4,15 +4,18 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import Controlador.Controlador;
+import common.Sensor;
 
 import javax.swing.JTextField;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JButton;
 
 public class Buscar extends JFrame implements ActionListener {
@@ -56,8 +59,24 @@ public class Buscar extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		// TODO Auto-generated method stub
-		controlador.buscarSensor(Integer.parseInt(textField.getText()));
+		ArrayList<Sensor> lista = controlador.buscarSensor(Integer.parseInt(textField.getText()));
 		textField.setText("");
+		String mensajeAMostrar="";
+		if(lista!=null) {
+			int contador = 0;
+			mensajeAMostrar+=lista.get(contador).toString();
+			contador++;
+			mensajeAMostrar+="\nPadre:\t";
+			mensajeAMostrar+=lista.get(contador).toString();
+			mensajeAMostrar+="\nHijos:\t";
+			for(int contadorHijos = 2; contadorHijos<lista.size();contadorHijos++) {
+				mensajeAMostrar+=lista.get(contador).toString();
+				mensajeAMostrar+="\n";
+			}
+		}else {
+			mensajeAMostrar="No se encontraron resultados para tu búsqueda";
+		}
+		JOptionPane.showMessageDialog(this, mensajeAMostrar);
 	}
 
 }

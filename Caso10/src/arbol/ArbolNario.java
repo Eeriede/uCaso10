@@ -11,6 +11,10 @@ public class ArbolNario<T> {
 	public void setRaiz(Nodo<T> raiz) {
 		this.raiz = raiz;
 	}
+	
+	public Nodo<T> getAuxiliar(){
+		return this.auxiliarBusqueda;
+	}
 
 	public ArbolNario(T pRaiz){
 		raiz = new Nodo<T>(pRaiz);

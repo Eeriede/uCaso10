@@ -8,17 +8,21 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import Controlador.Controlador;
+import common.Sensor;
 
 import javax.swing.JLabel;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JTextField;
 import javax.swing.JTree;
 import javax.swing.JComboBox;
 import javax.swing.JCheckBox;
 import javax.swing.JButton;
 
-public class Ingresar extends JFrame {
+public class Ingresar extends JFrame implements ActionListener{
 
 	private JPanel contentPane;
 	private JTextField textField;
@@ -75,7 +79,7 @@ public class Ingresar extends JFrame {
 		contentPane.add(textField_3);
 		textField_3.setColumns(10);
 		
-		JComboBox<?> comboBox = new JComboBox<?>();
+		JComboBox<Sensor> comboBox = new JComboBox<Sensor>();
 		comboBox.setEnabled(false);
 		comboBox.setBounds(113, 228, 92, 22);
 		contentPane.add(comboBox);
@@ -90,10 +94,17 @@ public class Ingresar extends JFrame {
 		
 		JButton btnAceptar = new JButton("Aceptar");
 		btnAceptar.setBounds(113, 285, 89, 23);
+		btnAceptar.addActionListener(this);
 		contentPane.add(btnAceptar);
 		
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		
 		this.setVisible(true);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 }
