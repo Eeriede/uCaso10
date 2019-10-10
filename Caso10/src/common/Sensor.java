@@ -6,6 +6,7 @@ public class Sensor {
 	private String barrio;
 	private String distrito;
 	private int consumoNormal;
+	private int capacidad;
 	
 	public Sensor(int pId, String pCanton) {
 		this.id = pId;

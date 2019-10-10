@@ -2,41 +2,33 @@ package vista;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import Controlador.Controlador;
+
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 
-public class Buscar extends JFrame {
+public class Buscar extends JFrame implements ActionListener {
 
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField textField;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Buscar frame = new Buscar();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	private Controlador controlador;
 
 	/**
 	 * Create the frame.
+	 * @param controlador2 
 	 */
-	public Buscar() {
+	public Buscar(Controlador pControlador) {
+		this.controlador = pControlador;
 		setTitle("Buscar");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -53,8 +45,19 @@ public class Buscar extends JFrame {
 		contentPane.add(lblId);
 		
 		JButton btnBuscar = new JButton("Buscar");
+		btnBuscar.addActionListener(this);
 		btnBuscar.setBounds(151, 151, 89, 23);
 		contentPane.add(btnBuscar);
+		
+		this.setVisible(true);
+		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		// TODO Auto-generated method stub
+		controlador.buscarSensor(Integer.parseInt(textField.getText()));
+		textField.setText("");
 	}
 
 }

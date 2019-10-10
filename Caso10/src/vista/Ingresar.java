@@ -6,6 +6,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import Controlador.Controlador;
+
 import javax.swing.JLabel;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
@@ -22,29 +25,14 @@ public class Ingresar extends JFrame {
 	private JTextField textField_1;
 	private JTextField textField_2;
 	private JTextField textField_3;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Ingresar frame = new Ingresar();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	private Controlador controlador;
 
 	/**
 	 * Create the frame.
 	 */
-	public Ingresar() {
+	public Ingresar(Controlador pControlador) {
+		this.controlador = pControlador;
 		setTitle("Ingresar");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 374);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -87,7 +75,7 @@ public class Ingresar extends JFrame {
 		contentPane.add(textField_3);
 		textField_3.setColumns(10);
 		
-		JComboBox comboBox = new JComboBox();
+		JComboBox<?> comboBox = new JComboBox<?>();
 		comboBox.setEnabled(false);
 		comboBox.setBounds(113, 228, 92, 22);
 		contentPane.add(comboBox);
@@ -103,5 +91,9 @@ public class Ingresar extends JFrame {
 		JButton btnAceptar = new JButton("Aceptar");
 		btnAceptar.setBounds(113, 285, 89, 23);
 		contentPane.add(btnAceptar);
+		
+		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		
+		this.setVisible(true);
 	}
 }

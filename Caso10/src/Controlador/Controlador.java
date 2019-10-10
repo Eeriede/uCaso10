@@ -1,4 +1,6 @@
 package Controlador;
+import java.util.ArrayList;
+
 import arbol.*;
 import common.*;
 import common.Nodo;
@@ -43,12 +45,24 @@ public class Controlador {
 		return true;
 	}
 	
-	public Sensor buscarSensor(int pId) {
+	public ArrayList<Sensor> buscarSensor(int pId) {
+		ArrayList<Sensor> listaSensores = new ArrayList<Sensor>();
 		Nodo<Sensor> nodoEncontrado = arbolBusqueda.searchTree(pId);
 		if(nodoEncontrado!=null) {
 			Sensor sensor = nodoEncontrado.getValue();
-			return sensor;
+			listaSensores.add(sensor);
+			nodoEncontrado.get
+			listaSensores.add(e);
+			return listaSensores;
 		}
 		return null;
 	}
+
+	public ArbolNario<Sensor> getArbol() {
+		return arbol;
+	}
+
+	public SplayTree<Sensor> getArbolBusqueda() {
+		return arbolBusqueda;
+	}	
 }
