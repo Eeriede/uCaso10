@@ -66,9 +66,9 @@ public class Buscar extends JFrame implements ActionListener {
 			int contador = 0;
 			mensajeAMostrar+=lista.get(contador).toString();
 			contador++;
-			mensajeAMostrar+="\nPadre:\t";
+			mensajeAMostrar+="\nPadre: ";
 			mensajeAMostrar+=lista.get(contador).toString();
-			mensajeAMostrar+="\nHijos:\t";
+			mensajeAMostrar+="\nHijos: ";
 			for(int contadorHijos = 2; contadorHijos<lista.size();contadorHijos++) {
 				mensajeAMostrar+=lista.get(contador).toString();
 				mensajeAMostrar+="\n";

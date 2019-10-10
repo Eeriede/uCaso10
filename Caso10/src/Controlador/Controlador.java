@@ -11,7 +11,7 @@ public class Controlador {
 	
 	public boolean agregarSensor( int pId, String pCanton) {
 		Sensor aAgregar = new Sensor(pId,pCanton);
-		if(arbol.buscarElemento(aAgregar) == null) {
+		if(arbol.buscarElemento(aAgregar) != null) {
 			return false;
 		}
 		arbol.agregarElemento(aAgregar, arbol.getRaiz().getValue());
@@ -21,12 +21,12 @@ public class Controlador {
 	
 	public boolean agregarSensor( int pId, String pCanton, int pIdPadre) {
 		Sensor aAgregar = new Sensor(pId,pCanton);
-		if(arbol.buscarElemento(aAgregar) == null) {
+		if(arbol.buscarElemento(aAgregar) != null) {
 			return false;
 		}
 		Sensor auxiliar = new Sensor(pIdPadre, "");
 		Sensor padreHipotetico = arbol.buscarElemento(auxiliar);
-		if(padreHipotetico== null){
+		if(padreHipotetico == null){
 			return false;
 		}
 		arbol.agregarElemento(aAgregar,padreHipotetico);

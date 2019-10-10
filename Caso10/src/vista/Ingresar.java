@@ -11,6 +11,8 @@ import Controlador.Controlador;
 import common.Sensor;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -105,6 +107,22 @@ public class Ingresar extends JFrame implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		
+		try {
+			String ID = textField.getText();
+			int id = Integer.parseInt(ID);
+			String canton = textField_1.getText();
+			if(canton.compareTo("")==0) {
+				JOptionPane.showMessageDialog(this, "Ocupa un cantón");
+			}else {
+				if(controlador.agregarSensor(id, canton)) {
+					JOptionPane.showMessageDialog(this, "Agregado correctamente");
+					this.dispose();
+				}else {
+					JOptionPane.showMessageDialog(this, "Error");
+				}
+			}
+		}catch(Exception error) {
+			JOptionPane.showMessageDialog(this, "El ID ocupa un numero");
+		}
 	}
 }

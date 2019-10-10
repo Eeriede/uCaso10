@@ -15,6 +15,7 @@ import Controlador.Controlador;
 import javax.swing.BoxLayout;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JButton;
 
 public class Eliminar extends JFrame implements ActionListener{
@@ -56,8 +57,12 @@ public class Eliminar extends JFrame implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		// TODO Auto-generated method stub
-		controlador.eliminarSensor(Integer.parseInt(textField.getText()));
-		textField.setText("");
-		
+		if(controlador.eliminarSensor(Integer.parseInt(textField.getText()))) {
+			textField.setText("");
+			JOptionPane.showMessageDialog(this, "Eliminado correctamente");
+			this.dispose();
+		}else {
+			JOptionPane.showMessageDialog(this, "Sensor no encontrado");
+		}
 	}
 }
